@@ -29,4 +29,7 @@ exports.makeDir = makeDir
 
 const helpCmd = require("./commands/help.js");
 
+const banCmd = require("./commands/moderation/ban.js");
+const kickCmd = require("./commands/moderation/kick.js");
+
 client.login(readJson("config.json").token);
