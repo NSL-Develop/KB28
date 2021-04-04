@@ -31,5 +31,6 @@ const helpCmd = require("./commands/help.js");
 
 const banCmd = require("./commands/moderation/ban.js");
 const kickCmd = require("./commands/moderation/kick.js");
+const muteCmd = require("./commands/moderation/mute.js");
 
 client.login(readJson("config.json").token);
