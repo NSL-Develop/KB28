@@ -14,4 +14,4 @@ Steps to use KB28 :
 - Write ``{"token":"<token>"}`` in this file. Replace ``<token>`` with your Discord bot token.
 - Open the command prompt in the current folder and run the command ``node index.js``.
 
-Your robot is now online ! You just have to invite it.
+Your bot is now online ! You just have to invite it.
