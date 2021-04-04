@@ -33,4 +33,6 @@ const banCmd = require("./commands/moderation/ban.js");
 const kickCmd = require("./commands/moderation/kick.js");
 const muteCmd = require("./commands/moderation/mute.js");
 
+const displayAvatarCmd = require("./commands/members/display-avatar.js");
+
 client.login(readJson("config.json").token);
