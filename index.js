@@ -21,9 +21,12 @@ const makeDir = (path) => {
 };
 
 exports.client = client
+exports.prefix = "!"
 exports.readJson = readJson
 exports.writeJson = writeJson
 exports.existsFile = existsFile
 exports.makeDir = makeDir
+
+const helpCmd = require("./commands/help.js");
 
 client.login(readJson("config.json").token);
