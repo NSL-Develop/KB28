@@ -14,7 +14,7 @@ client.on('message', msg => {
     const command = args.shift().toLowerCase();
     if (msg.guild != null) {
         if (command == 'ban' && msg.member.hasPermission('BAN_MEMBERS')) {
-            if (msg.mentions.users.first() && typeof(msg.mentions.users.first()) != "undefined") {
+            if (msg.mentions.users.first()) {
                 msg.guild.member(msg.mentions.users.first()).ban()
                 const banEmbed = new Discord.MessageEmbed()
                 .setTitle(`User Banned`)

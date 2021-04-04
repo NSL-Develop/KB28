@@ -14,7 +14,7 @@ client.on('message', msg => {
     const command = args.shift().toLowerCase();
     if (msg.guild != null) {
         if (command == 'mute' && msg.member.hasPermission('MUTE_MEMBERS')) {
-            if (msg.mentions.users.first() && typeof(msg.mentions.users.first()) != "undefined") {
+            if (msg.mentions.users.first()) {
                 if (msg.guild.roles.cache.find(role => role.name == "muted")) {
                     var role = msg.guild.roles.cache.find(role => role.name == "muted")
                     msg.guild.member(msg.mentions.users.first()).roles.add(role)

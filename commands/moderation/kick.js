@@ -14,7 +14,7 @@ client.on('message', msg => {
     const command = args.shift().toLowerCase();
     if (msg.guild != null) {
         if (command == 'kick' && msg.member.hasPermission('KICK_MEMBERS')) {
-            if (msg.mentions.users.first() && typeof(msg.mentions.users.first()) != "undefined") {
+            if (msg.mentions.users.first()) {
                 msg.guild.member(msg.mentions.users.first()).kick()
                 const kickEmbed = new Discord.MessageEmbed()
                 .setTitle(`User Kicked`)
