@@ -1,0 +1,29 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const fs = require('fs');
+client.setMaxListeners(0);
+
+client.on('ready', () => {
+    console.log(`Login : ${client.user.tag}`);
+});
+
+const readJson = (file) => {
+	return JSON.parse(fs.readFileSync(__dirname + "/" + file));
+};
+const writeJson = (file, json) => {
+	fs.writeFileSync(__dirname + "/" + file, JSON.stringify(json));
+};
+const existsFile = (file) => {
+	return fs.existsSync(__dirname + "/" + file);
+};
+const makeDir = (path) => {
+	return fs.mkdirSync(__dirname + "/" + path);
+};
+
+exports.client = client
+exports.readJson = readJson
+exports.writeJson = writeJson
+exports.existsFile = existsFile
+exports.makeDir = makeDir
+
+client.login(readJson("config.json").token);
