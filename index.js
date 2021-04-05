@@ -37,5 +37,6 @@ const displayAvatarCmd = require("./commands/members/display-avatar.js");
 
 const customCommandsManager = require("./commands/server/custom-commands-manager.js");
 const createCommandCmd = require("./commands/server/create-command.js");
+const deleteCommandCmd = require("./commands/server/delete-command.js");
 
 client.login(readJson("config.json").token);
