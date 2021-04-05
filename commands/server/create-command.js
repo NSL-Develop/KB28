@@ -32,6 +32,8 @@ client.on('message', msg => {
                     };
                 };
             };
+        } else {
+            msg.channel.send("Command Syntax : !create-command <command> <access : admin/moderator/everyone> <role/none> <message>")
         };
     };
 });
