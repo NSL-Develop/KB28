@@ -12,7 +12,7 @@ client.on('message', msg => {
     const prefix = index.prefix
     const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
-    if (msg.guild != null && msg.member.hasPermission('MANAGE_GUILD')) {
+    if (msg.guild != null && msg.member.hasPermission('MANAGE_GUILD') && msg.author.tag != "KB28#1545") {
         if (command == 'create-command' && args[0] && args[1] && args[2] && args[3]) {
             if (existsFile("servers/" + msg.guild.id + "/custom_commands/main.json")) {
                 createCommand(msg, args)
