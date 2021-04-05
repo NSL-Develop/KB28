@@ -13,27 +13,29 @@ client.on('message', msg => {
     const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
     if (msg.guild != null && msg.member.hasPermission('MANAGE_GUILD') && msg.author.tag != "KB28#1545") {
-        if (command == 'create-command' && args[0] && args[1] && args[2] && args[3]) {
-            if (existsFile("servers/" + msg.guild.id + "/custom_commands/main.json")) {
-                createCommand(msg, args)
-            } else {
-                if (!existsFile("servers/" + msg.guild.id + "/")) {
-                    makeDir("servers/" + msg.guild.id + "/")
-                    makeDir("servers/" + msg.guild.id + "/custom_commands/")
-                    var customCommandsJson = {"admin":{},"moderator":{},"everyone":{}}
-                    writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsJson)
+        if (command == 'create-command' && args[0]) {
+            if (args[1] && args[2] && args[3]) {
+                if (existsFile("servers/" + msg.guild.id + "/custom_commands/main.json")) {
                     createCommand(msg, args)
                 } else {
-                    if (!existsFile("servers/" + msg.guild.id + "/custom_commands/")) {
+                    if (!existsFile("servers/" + msg.guild.id + "/")) {
+                        makeDir("servers/" + msg.guild.id + "/")
                         makeDir("servers/" + msg.guild.id + "/custom_commands/")
                         var customCommandsJson = {"admin":{},"moderator":{},"everyone":{}}
                         writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsJson)
                         createCommand(msg, args)
+                    } else {
+                        if (!existsFile("servers/" + msg.guild.id + "/custom_commands/")) {
+                            makeDir("servers/" + msg.guild.id + "/custom_commands/")
+                            var customCommandsJson = {"admin":{},"moderator":{},"everyone":{}}
+                            writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsJson)
+                            createCommand(msg, args)
+                        };
                     };
                 };
+            } else {
+                msg.channel.send("Command Syntax : !create-command <command> <access : admin/moderator/everyone> <role/none> <message>")
             };
-        } else {
-            msg.channel.send("Command Syntax : !create-command <command> <access : admin/moderator/everyone> <role/none> <message>")
         };
     };
 });
