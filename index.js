@@ -35,4 +35,6 @@ const muteCmd = require("./commands/moderation/mute.js");
 
 const displayAvatarCmd = require("./commands/members/display-avatar.js");
 
+const createCommandCmd = require("./commands/server/create-command.js");
+
 client.login(readJson("config.json").token);
