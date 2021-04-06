@@ -12,21 +12,23 @@ client.on('message', msg => {
     const prefix = index.prefix
     const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
-    if (existsFile("servers/" + msg.guild.id + "/custom_commands/main.json")) {
-        processCommand(msg, command)
-    } else {
-        if (!existsFile("servers/" + msg.guild.id + "/")) {
-            makeDir("servers/" + msg.guild.id + "/")
-            makeDir("servers/" + msg.guild.id + "/custom_commands/")
-            var customCommandsJson = {"admin":{},"moderator":{},"everyone":{}}
-            writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsJson)
+    if (msg.guild != null) {
+        if (existsFile("servers/" + msg.guild.id + "/custom_commands/main.json")) {
             processCommand(msg, command)
         } else {
-            if (!existsFile("servers/" + msg.guild.id + "/custom_commands/")) {
+            if (!existsFile("servers/" + msg.guild.id + "/")) {
+                makeDir("servers/" + msg.guild.id + "/")
                 makeDir("servers/" + msg.guild.id + "/custom_commands/")
                 var customCommandsJson = {"admin":{},"moderator":{},"everyone":{}}
                 writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsJson)
                 processCommand(msg, command)
+            } else {
+                if (!existsFile("servers/" + msg.guild.id + "/custom_commands/")) {
+                    makeDir("servers/" + msg.guild.id + "/custom_commands/")
+                    var customCommandsJson = {"admin":{},"moderator":{},"everyone":{}}
+                    writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsJson)
+                    processCommand(msg, command)
+                };
             };
         };
     };
