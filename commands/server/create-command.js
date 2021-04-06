@@ -43,35 +43,31 @@ client.on('message', msg => {
 function createCommand(msg, args) {
     var customCommandsFile = readJson("servers/" + msg.guild.id + "/custom_commands/main.json")
     var commandTrigger = args[0]
-    if (typeof(customCommandsFile.admin[commandTrigger]) == "undefined" && typeof(customCommandsFile.moderator[commandTrigger]) == "undefined" && typeof(customCommandsFile.everyone[commandTrigger]) == "undefined") {
-        if (args[1] == "admin") {
-            var commandMode = "admin"
-        } else if (args[1] == "moderator") {
-            var commandMode = "moderator"
-        } else if (args[1] == "everyone") {
-            var commandMode = "everyone"
-        };
-        var commandRole = args[2]
-        var commandMessage = args.slice(3).join(" ")
-        if (args[2].toLowerCase != "none") {
-            customCommandsFile[commandMode][commandTrigger] = {"message":commandMessage}
-            const resultEmbed = new Discord.MessageEmbed()
-                .setTitle(`Command Created`)
-                .addFields(
-                    {'name' : 'New Command','value' : `${prefix}${commandTrigger}`},
-                    {'name' : 'Actions','value' : `Message : ${commandMessage}`})
-                msg.channel.send(resultEmbed)
-        } else {
-            customCommandsFile[commandMode][commandTrigger] = {"role":commandRole,"message":commandMessage}
-            const resultEmbed = new Discord.MessageEmbed()
-                .setTitle(`Command Created`)
-                .addFields(
-                    {'name' : 'New Command','value' : `${prefix}${commandTrigger}`},
-                    {'name' : 'Actions','value' : `Message : ${commandMessage}\nRole : ${commandRole}`})
-                msg.channel.send(resultEmbed)
-        }
-        writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsFile)
-    } else {
-        msg.channel.send("This command already exists.")
+    if (args[1] == "admin") {
+        var commandMode = "admin"
+    } else if (args[1] == "moderator") {
+        var commandMode = "moderator"
+    } else if (args[1] == "everyone") {
+        var commandMode = "everyone"
     };
+    var commandRole = args[2]
+    var commandMessage = args.slice(3).join(" ")
+    if (args[2].toLowerCase != "none") {
+        customCommandsFile[commandMode][commandTrigger] = {"message":commandMessage}
+        const resultEmbed = new Discord.MessageEmbed()
+            .setTitle(`Command Created`)
+            .addFields(
+                {'name' : 'New Command','value' : `${prefix}${commandTrigger}`},
+                {'name' : 'Actions','value' : `Message : ${commandMessage}`})
+            msg.channel.send(resultEmbed)
+    } else {
+        customCommandsFile[commandMode][commandTrigger] = {"role":commandRole,"message":commandMessage}
+        const resultEmbed = new Discord.MessageEmbed()
+            .setTitle(`Command Created`)
+            .addFields(
+                {'name' : 'New Command','value' : `${prefix}${commandTrigger}`},
+                {'name' : 'Actions','value' : `Message : ${commandMessage}\nRole : ${commandRole}`})
+            msg.channel.send(resultEmbed)
+    }
+    writeJson("servers/" + msg.guild.id + "/custom_commands/main.json", customCommandsFile)
 };
