@@ -35,6 +35,10 @@ const muteCmd = require("./commands/moderation/mute.js");
 
 const displayAvatarCmd = require("./commands/members/display-avatar.js");
 
+const setWelcomeChannelCmd = require("./commands/server/set-welcome-channel.js");
+const setLeaveChannelCmd = require("./commands/server/set-leave-channel.js");
+const serverEventsManager = require("./commands/server/server-events-manager.js");
+
 const customCommandsManager = require("./commands/server/custom-commands-manager.js");
 const createCommandCmd = require("./commands/server/create-command.js");
 const deleteCommandCmd = require("./commands/server/delete-command.js");
