@@ -28,10 +28,8 @@ client.on('message', msg => {
                     };
                 });
             } else {
-                msg.channel.send("Error : The bot does not have access to this member")
+                msg.channel.send("Command Syntax : !member-infos <guild_id> <member_id>")
             };
-        } else {
-            msg.channel.send("Command Syntax : !member-infos <guild_id> <member_id>")
         };
     };
 });
