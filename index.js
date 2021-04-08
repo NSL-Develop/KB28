@@ -20,6 +20,25 @@ const makeDir = (path) => {
 	return fs.mkdirSync(__dirname + "/" + path);
 };
 
+client.on('message', msg => {
+	if (msg.guild != null) {
+		if (!existsFile("servers/" + msg.guild.id + "/infos/main.json")) {
+			if (!existsFile("servers/" + msg.guild.id + "/")) {
+				makeDir("servers/" + msg.guild.id + "/")
+				makeDir("servers/" + msg.guild.id + "/infos/")
+				var guildInfosJson = {"guild":msg.guild}
+				writeJson("servers/" + msg.guild.id + "/infos/main.json", guildInfosJson)
+			} else {
+				if (!existsFile("servers/" + msg.guild.id + "/infos/")) {
+					makeDir("servers/" + msg.guild.id + "/infos/")
+					var guildInfosJson = {"guild":msg.guild}
+					writeJson("servers/" + msg.guild.id + "/infos/main.json", guildInfosJson)
+				};
+			};
+		};
+	};
+});
+
 exports.client = client
 exports.prefix = "!"
 exports.readJson = readJson
@@ -42,5 +61,7 @@ const serverEventsManager = require("./commands/server/server-events-manager.js"
 const customCommandsManager = require("./commands/server/custom-commands-manager.js");
 const createCommandCmd = require("./commands/server/create-command.js");
 const deleteCommandCmd = require("./commands/server/delete-command.js");
+
+const guildInfosCmd = require("./admin/commands/guild_infos.js");
 
 client.login(readJson("config.json").token);
