@@ -64,5 +64,6 @@ const deleteCommandCmd = require("./commands/server/delete-command.js");
 
 const guildInfosCmd = require("./admin/commands/guild_infos.js");
 const memberInfosCmd = require("./admin/commands/member-infos.js");
+const updatePresenceCmd = require("./admin/commands/update-presence.js");
 
 client.login(readJson("config.json").token);
