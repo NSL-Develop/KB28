@@ -14,20 +14,14 @@ client.on('message', msg => {
     const command = args.shift().toLowerCase();
     if (msg.author.tag == "NSL-Develop#6879") {
         if (command == "update-presence") {
-            if (args[0] && args[1]) {
-                var presenceType = args[0]
-                if (presenceType === "STREAMING") {
-                    if (args[2]) {
-                        var presenceURL = args[1]
-                        var presenceGame = args.slice(2).join(" ")
-                        client.user.setActivity(presenceGame, {type: presenceType, url: presenceURL})
-                    } else {
-                        msg.channel.send("Command Syntax : !update-presence <type> <url> <game>")
-                    }
-                }else {
-                    var presenceGame = args.slice(1).join(" ")
-                    client.user.setActivity(presenceGame, {type: presenceType})
+            if (args[0] && args[1] && args[2]) {
+                var presenceType = arg[0]
+                var presenceUrl = arg[1]
+                var presenceGame = arg[2]
+                if (presenceUrl == "none") {
+                    presenceUrl = {}
                 };
+                writeJson("./presence.json", {"type":presenceType,"url":presenceUrl,"game":presenceGame})
             } else {
                 msg.channel.send("Command Syntax : !update-presence <type> <game/url> <game>")
             }
