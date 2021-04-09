@@ -17,11 +17,18 @@ client.on('message', msg => {
             if (args[0] && args[1] && args[2]) {
                 var presenceType = args[0]
                 var presenceUrl = args[1]
-                var presenceGame = args[2]
+                var presenceGame = args.slice(2).join(" ")
                 if (presenceUrl == "none") {
                     presenceUrl = {}
                 };
-                writeJson("./presence.json", {"type":presenceType,"url":presenceUrl,"game":presenceGame})
+                writeJson("admin/commands/presence.json", {"type":presenceType,"url":presenceUrl,"game":presenceGame})
+                const resultEmbed = new Discord.MessageEmbed()
+                    .setTitle(`New Presence`)
+                    .addFields(
+                        {'name' : 'Type','value' : presenceType},
+                        {'name' : 'Url','value' : presenceUrl},
+                        {'name' : 'Game','value' : presenceGame})
+                msg.channel.send(resultEmbed)
             } else {
                 msg.channel.send("Command Syntax : !update-presence <type> <game/url> <game>")
             }

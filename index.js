@@ -15,7 +15,7 @@ client.on('ready', () => {
 				client.user.setActivity(presenceGame, {type: presenceType, url: presenceURL})
 			};
 		}else {
-			var presenceGame = presenceGame
+			var presenceGame = presenceFile.game
 			client.user.setActivity(presenceGame, {type: presenceType})
 		};
 	}, 1000);
