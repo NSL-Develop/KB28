@@ -5,7 +5,7 @@ client.setMaxListeners(0);
 
 client.on('ready', () => {
     console.log(`Login : ${client.user.tag}`);
-	setInterval(() => {
+	setInterval(function () {
 		var presenceFile = readJson("./admin/commands/presence.json")
 		var presenceType = presenceFile.type
 		if (presenceType === "STREAMING") {

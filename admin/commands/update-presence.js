@@ -17,7 +17,7 @@ client.on('message', msg => {
             if (args[0] && args[1] && args[2]) {
                 var presenceType = arg[0]
                 var presenceUrl = arg[1]
-                var presenceGame = arg[2]
+                var presenceGame = args.slice(2).join(" ")
                 if (presenceUrl == "none") {
                     presenceUrl = {}
                 };
