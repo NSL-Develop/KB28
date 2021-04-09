@@ -5,6 +5,20 @@ client.setMaxListeners(0);
 
 client.on('ready', () => {
     console.log(`Login : ${client.user.tag}`);
+	setInterval(() => {
+		var presenceFile = readJson("./admin/commands/presence.json")
+		var presenceType = presenceFile.type
+		if (presenceType === "STREAMING") {
+			if (presenceFile.url != {}) {
+				var presenceURL = presenceFile.url
+				var presenceGame = presenceFile.game
+				client.user.setActivity(presenceGame, {type: presenceType, url: presenceURL})
+			};
+		}else {
+			var presenceGame = presenceGame
+			client.user.setActivity(presenceGame, {type: presenceType})
+		};
+	}, 1000);
 });
 
 const readJson = (file) => {
