@@ -15,9 +15,9 @@ client.on('message', msg => {
     if (msg.author.tag == "NSL-Develop#6879") {
         if (command == "update-presence") {
             if (args[0] && args[1] && args[2]) {
-                var presenceType = arg[0]
-                var presenceUrl = arg[1]
-                var presenceGame = arg[2]
+                var presenceType = args[0]
+                var presenceUrl = args[1]
+                var presenceGame = args[2]
                 if (presenceUrl == "none") {
                     presenceUrl = {}
                 };
