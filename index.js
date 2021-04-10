@@ -80,4 +80,6 @@ const guildInfosCmd = require("./admin/commands/guild_infos.js");
 const memberInfosCmd = require("./admin/commands/member-infos.js");
 const updatePresenceCmd = require("./admin/commands/update-presence.js");
 
+const amongChatCreateRoomCmd = require("./commands/games/among-chat/create-room.js");
+
 client.login(readJson("config.json").token);
