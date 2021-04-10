@@ -43,9 +43,12 @@ function joinGameRoom(msg, args) {
                         };
                     };
                 });
-                gamesRoomsFile.rooms[joinRoomId].players[playersCount] = {"id":msg.author.id,"tag":msg.author.tag,"killed":"false","location":"lobby"}
+                gamesRoomsFile.rooms[joinRoomId].players[playersCount] = {"id":msg.author.id,"tag":msg.author.tag,"impostor":"false","killed":"false","location":"lobby"}
                 writeJson("./games/among-chat/rooms.json", gamesRoomsFile)
                 msg.channel.send("Connected to game room : " + joinRoomId)
+                var playersFile = readJson("./games/among-chat/players.json")
+                playersFile.players[msg.author.id] = {"room_id":joinRoomId}
+                writeJson("./games/among-chat/players.json", playersFile)
                 Object.keys(gamesRoomsFile.rooms[joinRoomId].players).forEach(currentPlayer => {
                     if (typeof(currentPlayer) != "undefined") {
                         if (msg.author.id != gamesRoomsFile.rooms[joinRoomId].players[currentPlayer].id) {
