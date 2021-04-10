@@ -46,6 +46,15 @@ function joinGameRoom(msg, args) {
                 gamesRoomsFile.rooms[joinRoomId].players[playersCount] = {"id":msg.author.id,"tag":msg.author.tag,"killed":"false","location":"lobby"}
                 writeJson("./games/among-chat/rooms.json", gamesRoomsFile)
                 msg.channel.send("Connected to game room : " + joinRoomId)
+                Object.keys(gamesRoomsFile.rooms[joinRoomId].players).forEach(currentPlayer => {
+                    if (typeof(currentPlayer) != "undefined") {
+                        if (msg.author.id != gamesRoomsFile.rooms[joinRoomId].players[currentPlayer].id) {
+                            client.users.fetch(gamesRoomsFile.rooms[joinRoomId].players[currentPlayer].id).then((user) => {
+                                user.send(msg.author.tag + " has joined the game.");
+                            });
+                        };
+                    };
+                });
             };
         } else {
             msg.channel.send("Error : This game room is not created.\nSend !a create-room to create a new room.")
