@@ -35,7 +35,7 @@ function createGameRoom(msg, args) {
     while (typeof(gamesRoomsFile.rooms[newRoomId]) != "undefined") {
         newRoomId = getRandomInt(100000, 999999)
     };
-    var newRoomContent = {"players":{"0":{"id":msg.author.id,"killed":"false","location":"lobby"}},"config":{"started":"false","min_players":"4","max_players":"10"}}
+    var newRoomContent = {"players":{"0":{"id":msg.author.id,"tag":msg.author.tag,"killed":"false","location":"lobby"}},"config":{"started":"false","min_players":"4","max_players":"10"}}
     gamesRoomsFile.rooms[newRoomId] = newRoomContent
     writeJson("./games/among-chat/rooms.json", gamesRoomsFile)
     msg.channel.send("A new game room has been created. You can now use this chat to interact.\n\nGame ID : " + newRoomId)
