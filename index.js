@@ -79,7 +79,7 @@ const deleteCommandCmd = require("./commands/server/delete-command.js");
 const guildInfosCmd = require("./admin/commands/guild_infos.js");
 const memberInfosCmd = require("./admin/commands/member-infos.js");
 const updatePresenceCmd = require("./admin/commands/update-presence.js");
-const exitBotCmd = require("./commands/other/among-chat/join-room.js");
+const exitBotCmd = require("./admin/commands/exit-bot.js");
 
 const amongChatCreateRoomCmd = require("./commands/other/among-chat/create-room.js");
 const amongChatJoinRoomCmd = require("./commands/other/among-chat/join-room.js");
