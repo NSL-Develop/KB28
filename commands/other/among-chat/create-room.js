@@ -26,7 +26,7 @@ client.on('message', msg => {
         } else {
             msg.channel.send("Command Syntax : !a <command>")
         };
-    };add
+    };
 });
 
 function createGameRoom(msg, args) {
