@@ -52,7 +52,7 @@ function createCommand(msg, args) {
     };
     var commandRole = args[2]
     var commandMessage = args.slice(3).join(" ")
-    if (args[2].toLowerCase != "none") {
+    if (commandRole.toLowerCase == "none") {
         customCommandsFile[commandMode][commandTrigger] = {"message":commandMessage}
         const resultEmbed = new Discord.MessageEmbed()
             .setTitle(`Command Created`)
