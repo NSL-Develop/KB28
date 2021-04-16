@@ -81,8 +81,4 @@ const memberInfosCmd = require("./admin/commands/member-infos.js");
 const updatePresenceCmd = require("./admin/commands/update-presence.js");
 const exitBotCmd = require("./admin/commands/exit-bot.js");
 
-const amongChatCreateRoomCmd = require("./commands/other/among-chat/create-room.js");
-const amongChatJoinRoomCmd = require("./commands/other/among-chat/join-room.js");
-const amongChatLeaveRoomCmd = require("./commands/other/among-chat/leave-room.js");
-
 client.login(readJson("config.json").token);
