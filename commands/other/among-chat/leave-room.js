@@ -32,7 +32,7 @@ function leaveGameRoom(msg, args) {
     if (typeof(playersFile.players[msg.author.id].room_id) != "undefined" && playersFile.players[msg.author.id].room_id != "none") {
         var playerId = msg.author.id
         var playerRoomId = playersFile.players[playerId].room_id
-        var playersFile = readJson("./games/among-chat/rooms.json")
+        var gamesRoomsFile = readJson("./games/among-chat/rooms.json")
         Object.keys(gamesRoomsFile.rooms[playerRoomId].players).forEach(currentPlayer => {
             if (typeof(currentPlayer) != "undefined") {
                 if (currentPlayer.id == playerId) {
