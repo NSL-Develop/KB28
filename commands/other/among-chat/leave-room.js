@@ -40,6 +40,7 @@ function leaveGameRoom(msg, args) {
                     writeJson("./games/among-chat/rooms.json", gamesRoomsFile)
                     playersFile.players[playerId].room_id = "none"
                     writeJson("./games/among-chat/players.json", playersFile)
+                    msg.channel.send("The game room has been left.")
                 };
             };
         });
