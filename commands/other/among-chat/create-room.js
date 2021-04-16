@@ -35,11 +35,16 @@ function createGameRoom(msg, args) {
     while (typeof(gamesRoomsFile.rooms[newRoomId]) != "undefined") {
         newRoomId = getRandomInt(100000, 999999)
     };
-    var newRoomContent = {"players":{"0":{"id":msg.author.id,"tag":msg.author.tag,"impostor":"false","killed":"false","location":"lobby"}},"config":{"started":"false","min_players":"4","max_players":"10"}}
-    gamesRoomsFile.rooms[newRoomId] = newRoomContent
-    writeJson("./games/among-chat/rooms.json", gamesRoomsFile)
     var playersFile = readJson("./games/among-chat/players.json")
-    playersFile.players[msg.author.id] = {"room_id":newRoomId}
-    writeJson("./games/among-chat/players.json", playersFile)
-    msg.channel.send("A new game room has been created. You can now use this chat to interact.\n\nGame ID : " + newRoomId)
+    if (typeof(playersFile.players[msg.author.id].room_id) == "undefined" || playersFile.players[msg.author.id].room_id == "none") {
+        var newRoomContent = {"players":{"0":{"id":msg.author.id,"tag":msg.author.tag,"impostor":"false","killed":"false","location":"lobby"}},"config":{"started":"false","min_players":"4","max_players":"10"}}
+        gamesRoomsFile.rooms[newRoomId] = newRoomContent
+        writeJson("./games/among-chat/rooms.json", gamesRoomsFile)
+        var playersFile = readJson("./games/among-chat/players.json")
+        playersFile.players[msg.author.id] = {"room_id":newRoomId}
+        writeJson("./games/among-chat/players.json", playersFile)
+        msg.channel.send("A new game room has been created. You can now use this chat to interact.\n\nGame ID : " + newRoomId)
+    } else {
+        msg.channel.send("You are already in a game room !\nSend !a leave-room to leave.")
+    };
 };
