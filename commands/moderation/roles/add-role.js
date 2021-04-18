@@ -18,12 +18,12 @@ client.on('message', msg => {
                 var role = msg.guild.roles.cache.find(role => role.name === args[0])
                 var member = msg.mentions.members.first()
                 member.roles.add(role)
-
+                msg.channel.send("The role has been added.")
             } else {
                 msg.channel.send("Command Syntax : !add-role <role_name> <target_member>")
             };
         } else {
-            msg.channel.send("You don't have the permission to execute this command")
+            msg.channel.send("You don't have the permission to execute this command.")
         };
     };
 });

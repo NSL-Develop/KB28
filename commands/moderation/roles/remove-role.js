@@ -18,7 +18,7 @@ client.on('message', msg => {
                 var role = msg.guild.roles.cache.find(role => role.name === args[0])
                 var member = msg.mentions.members.first()
                 member.roles.remove(role)
-
+                msg.channel.send("The role has been removed.")
             } else {
                 msg.channel.send("Command Syntax : !remove-role <role_name> <target_member>")
             };
