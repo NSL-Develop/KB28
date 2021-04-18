@@ -23,7 +23,7 @@ client.on('message', msg => {
                 msg.channel.send("Command Syntax : !add-role <role_name> <target_member>")
             };
         } else {
-            msg.channel.send("You have no permission to execute this command")
+            msg.channel.send("You don't have the permission to execute this command")
         };
     };
 });
