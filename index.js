@@ -66,6 +66,8 @@ const banCmd = require("./commands/moderation/ban.js");
 const kickCmd = require("./commands/moderation/kick.js");
 const muteCmd = require("./commands/moderation/mute.js");
 
+const addRoleCmd = require("./commands/moderation/roles/add-role.js");
+
 const displayAvatarCmd = require("./commands/members/display-avatar.js");
 
 const setWelcomeChannelCmd = require("./commands/server/set-welcome-channel.js");
