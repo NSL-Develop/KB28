@@ -13,10 +13,10 @@ client.on('message', msg => {
     const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
     if (command == "add-role") {
-        if (msg.author.hasPermission('MANAGE_ROLES')) {
-            if (args[0] && args[1] && args[1] == msg.mentions.users.first()) {
+        if (msg.member.hasPermission('MANAGE_ROLES')) {
+            if (args[0] && args[1]) {
                 var role = msg.guild.roles.cache.find(role => role.name === args[0])
-                var member = msg.mentions.users.first()
+                var member = msg.mentions.members.first()
                 member.roles.add(role)
 
             } else {
