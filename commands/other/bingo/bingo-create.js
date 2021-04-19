@@ -17,22 +17,24 @@ client.on('message', msg => {
     const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
     if (command == "b") {
-        if (msg.member.hasPermission("MANAGE_GUILD")) {
-            if (args[0]) {
-                if (args[0] == "create") {
-                    if (args[1] && args[2] && args[1] < args[2]) {
-                        var minNumber = args[1]
-                        var maxNumber = args[2]
-                        createProcess(msg, args, minNumber, maxNumber)
-                    }  else {
-                        msg.channel.send("Command Syntax : !b create <min> <max>")
+        if (msg.guild != null) {
+            if (msg.member.hasPermission("MANAGE_GUILD")) {
+                if (args[0]) {
+                    if (args[0] == "create") {
+                        if (args[1] && args[2] && args[1] < args[2]) {
+                            var minNumber = args[1]
+                            var maxNumber = args[2]
+                            createProcess(msg, args, minNumber, maxNumber)
+                        }  else {
+                            msg.channel.send("Command Syntax : !b create <min> <max>")
+                        };
                     };
+                } else {
+                    msg.channel.send("Command Syntax : !b <command>")
                 };
             } else {
-                msg.channel.send("Command Syntax : !b <command>")
+                msg.channel.send("You do not have permission to create a bingo !")
             };
-        } else {
-            msg.channel.send("You do not have permission to create a bingo !")
         };
     };
 });
@@ -68,5 +70,5 @@ function bingoCreate(msg, args, minNumber, maxNumber) {
         .addFields(
             {'name' : 'Creator','value' : `<@${msg.author.id}>`},
             {'name' : 'Infos','value' : `Min Number : ${minNumber}\nMax Number : ${maxNumber}`})
-     msg.channel.send(resultEmbed)
+    msg.channel.send(resultEmbed)
 };
