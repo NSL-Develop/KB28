@@ -17,8 +17,8 @@ client.on('message', msg => {
             if (args[0]) {
                 if (!isNaN(parseInt(args[0]))) {
                     var tryNumber = parseInt(args[0])
-                    if (existsFile("servers/" + msg.guild.id + "/games/bingo/main.json")) {
-                        var bingoFile = readJson("servers/" + msg.guild.id + "/games/bingo/main.json")
+                    if (existsFile("servers/" + msg.guild.id + "/games/bingo.json")) {
+                        var bingoFile = readJson("servers/" + msg.guild.id + "/games/bingo.json")
                         if (typeof(bingoFile.main) != "undefined") {
                             var bingoNumber = parseInt(bingoFile.main.number)
                             if (tryNumber < bingoNumber) {
@@ -26,6 +26,8 @@ client.on('message', msg => {
                             } else if (tryNumber > bingoNumber) {
                                 msg.channel.send("The mystery number is less than " + tryNumber)
                             } else if (tryNumber == bingoNumber) {
+                                delete bingoFile.main
+                                writeJson("servers/" + msg.guild.id + "/games/bingo.json", bingoFile)
                                 const winEmbed = new Discord.MessageEmbed()
                                     .setTitle(`You win !`)
                                     .addFields(
