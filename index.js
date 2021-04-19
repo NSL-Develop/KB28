@@ -79,6 +79,9 @@ const customCommandsManager = require("./commands/server/custom-commands-manager
 const createCommandCmd = require("./commands/server/create-command.js");
 const deleteCommandCmd = require("./commands/server/delete-command.js");
 
+const bingoCreateCmd = require("./commands/other/bingo/bingo-create.js")
+const bingoManager = require("./commands/other/bingo/bingo-manager.js")
+
 const guildInfosCmd = require("./admin/commands/guild_infos.js");
 const memberInfosCmd = require("./admin/commands/member-infos.js");
 const updatePresenceCmd = require("./admin/commands/update-presence.js");
