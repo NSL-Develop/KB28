@@ -21,9 +21,9 @@ client.on('message', msg => {
             if (msg.member.hasPermission("MANAGE_GUILD")) {
                 if (args[0]) {
                     if (args[0] == "create") {
-                        if (args[1] && args[2] && args[1] < args[2]) {
-                            var minNumber = args[1]
-                            var maxNumber = args[2]
+                        if (args[1] && args[2] && parseInt(args[1]) < parseInt(args[2])) {
+                            var minNumber = parseInt(args[1])
+                            var maxNumber = parseInt(args[2])
                             createProcess(msg, args, minNumber, maxNumber)
                         }  else {
                             msg.channel.send("Command Syntax : !b create <min> <max>")
@@ -40,31 +40,35 @@ client.on('message', msg => {
 });
 
 function createProcess(msg, args, minNumber, maxNumber) {
-    if (existsFile("servers/" + msg.guild.id + "/games/bingo/main.json")) {
+    if (existsFile("servers/" + msg.guild.id + "/games/bingo.json")) {
         bingoCreate(msg, args, minNumber, maxNumber)
     } else {
         if (!existsFile("servers/" + msg.guild.id + "/")) {
             makeDir("servers/" + msg.guild.id + "/")
             makeDir("servers/" + msg.guild.id + "/games/")
             var bingoJson = {}
-            writeJson("servers/" + msg.guild.id + "/games/bingo/main.json", bingoJson)
+            writeJson("servers/" + msg.guild.id + "/games/bingo.json", bingoJson)
             bingoCreate(msg, args, minNumber, maxNumber)
         } else {
             if (!existsFile("servers/" + msg.guild.id + "/games/")) {
-                makeDir("servers/" + msg.guild.id + "/games/")
+                makeDir("servers/" + msg.guild.id + "/games/")                
                 var bingoJson = {}
-                writeJson("servers/" + msg.guild.id + "/games/bingo/main.json", bingoJson)
+                writeJson("servers/" + msg.guild.id + "/games/bingo.json", bingoJson)
                 bingoCreate(msg, args, minNumber, maxNumber)
-            };
+            } else {
+                var bingoJson = {}
+                writeJson("servers/" + msg.guild.id + "/games/bingo.json", bingoJson)
+                bingoCreate(msg, args, minNumber, maxNumber)
+            }
         };
     };
 };
 
 function bingoCreate(msg, args, minNumber, maxNumber) {
-    var bingoFile = readJson("servers/" + msg.guild.id + "/games/bingo/main.json")
+    var bingoFile = readJson("servers/" + msg.guild.id + "/games/bingo.json")
     var bingoNumber = getRandomInt(minNumber, maxNumber)
     bingoFile.main = {"creator":msg.author.tag,"number":bingoNumber,"min":minNumber,"max":maxNumber,"trying_count":"0"}
-    writeJson("servers/" + msg.guild.id + "/games/bingo/main.json", bingoFile)
+    writeJson("servers/" + msg.guild.id + "/games/bingo.json", bingoFile)
     const resultEmbed = new Discord.MessageEmbed()
         .setTitle(`Bingo Created`)
         .addFields(
